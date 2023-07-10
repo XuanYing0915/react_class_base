@@ -1,7 +1,11 @@
+import styles from '@/styles/style-test.module.css'
 export default function JsxValues() {
   return (
     <>
-      <h1>JSX語法中的各種值渲染呈現</h1>
+      {/* 導入後要引用css 必須指定導入文件的變數+[] 
+    ` ${styles['  ']}`
+    */}
+      <h1 className={` ${styles['red']}`}>JSX語法中的各種值渲染呈現</h1>
       <h2>Number</h2>
       {123 - 99}
       {NaN}
