@@ -1,4 +1,5 @@
 import '@/styles/globals.css'
+// @ 根目錄的意思
 
 export default function MyApp({ Component, pageProps }) {
   // Use the layout defined at the page level, if available
