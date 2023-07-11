@@ -31,7 +31,7 @@ export default function JsxValues() {
       {/* {{ a: 1, b: 2 }} */}
       <h2>Function</h2>
       {/* 會有警告，不呈現 */}
-      {() => {}}
+      {/* {() => {}} */}
     </>
   )
 }
