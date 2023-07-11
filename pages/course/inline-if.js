@@ -1,12 +1,10 @@
 import { useState } from 'react'
 
 export default function InlineIf() {
-  // 使用react 的特性 =狀態(state) 不可改變性
-  // 若要改變  需要賦予一個新的值  並設定給他覆蓋
   const [count, setCount] = useState(0)
-
   return (
     <>
+      <div>判斷式應用</div>
       <button
         onClick={() => {
           setCount(count + 1)
@@ -21,7 +19,12 @@ export default function InlineIf() {
       >
         -
       </button>
-      <div>點擊次數: {count}</div>
+      <hr />
+      {/* &&前面的運算要能算出布林值 */}
+      {!!count && <h2>訊息:目前次數為{count}</h2>}
+      {Boolean(count) && <h2>訊息:目前次數為{count}</h2>}
+      {count !== 0 && <h2>訊息:目前次數為{count}</h2>}
+      {count > 0 && <h2>訊息:目前次數為{count}</h2>}
     </>
   )
 }
