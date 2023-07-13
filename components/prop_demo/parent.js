@@ -9,6 +9,7 @@ export default function Parent() {
         <Children id="1" text="由父母元件更改" name="cc" price={100} />
         <Children id="2" text="可定義很多不同東西" name="cc" price={100} />
         <Children id="3" text="用同一個子元件" name="cc" price={100} />
+        <Children />
       </div>
       -------------------------
       <style jsx>{`
