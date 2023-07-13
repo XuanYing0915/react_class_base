@@ -9,7 +9,10 @@ export default function InlineIf() {
     <>
       <button
         onClick={() => {
+          const newN = count + 1
+          // set...有異步的特性
           setCount(count + 1)
+          console.log(newN)
         }}
       >
         +
