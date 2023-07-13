@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
 
 export default function StarRating() {
+  // 點擊星星確定評分
   const [rating, setRating] = useState(0)
+  // 滑鼠滑過紀錄的星星狀態
+  const [hover, setHover] = useState(0)
 
   return (
     <>
@@ -18,10 +21,18 @@ export default function StarRating() {
             return (
               <button
                 key={i}
-                // 如果評分小於等於i  上金色的class
-                className={score <= rating ? 'on' : 'off'}
+                // 分數小於等於目前的評分狀態的星星圖  設定為點亮狀態
+                className={score <= rating || score <= hover ? 'on' : 'off'}
                 onClick={() => {
                   setRating(score)
+                }}
+                // 滑動時暫時設定為點亮
+                onMouseEnter={() => {
+                  setHover(score)
+                }}
+                // 離開時恢復為原本狀態
+                onMouseLeave={() => {
+                  setHover(0)
                 }}
               >
                 &#9733;
@@ -39,8 +50,10 @@ export default function StarRating() {
           }
           .on {
             color: gold;
+            font-size: 50px;
           }
           .off {
+            font-size: 30px;
             color: gray;
           }
         `}
