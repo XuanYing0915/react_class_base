@@ -1,5 +1,8 @@
-import React from 'react'
-
 export default function ChildA(props) {
-  return <h2>ChildA</h2>
+  return (
+    <>
+      <h1>ChildA</h1>
+      <p>來自Parent(父母元件)的資料: {props.pData}</p>
+    </>
+  )
 }
