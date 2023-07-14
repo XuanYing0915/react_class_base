@@ -5,6 +5,7 @@ const AuthContext = createContext(null)
 
 // 建立提供者元件(Provider)
 // 要讓`/pages/_app.js`導入包裹使用，可讓所有的頁面及元件共享狀態
+// 接收一個 children 屬性，目的是將狀態資料提供給其他元件使用。
 export function AuthProvider({ children }) {
   const [auth, setAuth] = useState({ id: 0, name: '', token: '' })
 
