@@ -14,6 +14,9 @@ export default function Parent() {
       <p>來自ChildB的內部資料:{dataFromChildB}</p>
       {/* 利用props傳遞，設定狀態的方法 */}
       <ChildB setDataFromChildB={setDataFromChildB} />
+      {/* 利用props傳遞得到的狀態 */}
+      {/* A拿到B的資料 */}
+      <ChildA dataFromChildB={dataFromChildB} />
     </>
   )
 }
