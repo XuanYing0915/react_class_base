@@ -6,6 +6,7 @@ export default function Item({
   completed,
   text,
   handleToggleCompleted,
+  handleToggleEditing,
   handleRemove,
 }) {
   return (
@@ -21,6 +22,13 @@ export default function Item({
           }}
         />
         {text}
+        <button
+          onClick={() => {
+            handleToggleEditing(id)
+          }}
+        >
+          編輯
+        </button>
         <button
           onClick={() => {
             // setTodos(remove(todos, id))

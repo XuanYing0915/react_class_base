@@ -1,13 +1,18 @@
 import { useState } from 'react'
 import AddForm from './add-form'
 import List from './list'
+import Filter from './filter-btn'
+
+
 
 export default function TodoIndex() {
   // 定義待辨事項狀態，每個成員 todo = { id:number, text:string, completed:bool }
   // !!重要!! 資料一定要有id，因為key要用id才可以作新增、修改、刪除，這是react中map時需要的
   const [todos, setTodos] = useState([
-    { id: 1, text: '買牛奶', completed: false },
+    { id: 1, text: '買牛奶', completed: false ,editing:false},
     { id: 2, text: '學react', completed: true },
+    { id: 3, text: '學react', completed: true },
+    { id: 4, text: '學react', completed: true },
   ])
 
   // 呈現過濾用的狀態，只有三種類型 type = '所有' | '進行中' | '已完成'
@@ -42,6 +47,26 @@ export default function TodoIndex() {
     })
   }
 
+// 切換進入編輯狀態 (純粹函式(pure function)，只處理狀態改變)
+const toggleEditing = (todos, id) => {
+  return todos.map((v) => {
+    // 如果有比對到v.id是id，作把布林值設為true
+    if (v.id === id) return { ...v, editing: true }
+    // 同時之間只能有一個true，其它都要false
+    else return { ...v, editing: false }
+  })
+}
+
+// 編輯完成儲存用
+const updateText = (todos, id, text) => {
+  return todos.map((v) => {
+    // 如果有比對到v.id是id，將text改為新的傳入text，把editing設為false(恢復原本狀態)
+    if (v.id === id) return { ...v, text: text, editing: false }
+    else return { ...v }
+  })
+}
+
+
   // 移除todo (純粹函式(pure function)，只處理狀態改變)
   const remove = (todos, id) => {
     //如果有比對到v.id是id，就作移除該成員
@@ -62,11 +87,19 @@ export default function TodoIndex() {
   const handleAdd = (inputText) => {
     setTodos(add(todos, inputText))
   }
+   // 專門設計給Item子元件用的處理函式
+   const handleUpdateText = (id, text) => {
+    setTodos(updateText(todos, id, text))
+  }
 
   // 專門設計給Item子元件用的處理函式
   const handleToggleCompleted = (id) => {
     setTodos(toggleCompleted(todos, id))
   }
+    // 專門設計給Item子元件用的處理函式
+    const handleToggleEditing = (id) => {
+      setTodos(toggleEditing(todos, id))
+    }
 
   // 專門設計給Item子元件用的處理函式
   const handleRemove = (id) => {
@@ -81,12 +114,16 @@ export default function TodoIndex() {
         todos={filterByType(todos, type)}
         handleRemove={handleRemove}
         handleToggleCompleted={handleToggleCompleted}
+        handleToggleEditing={handleToggleEditing}
+        handleUpdateText={handleUpdateText}
       />
       <hr />
-      {typeOptions.map((v, i) => {
+      <Filter type={type} setType={setType}/>
+      {/* {typeOptions.map((v, i) => {
         return (
           <button
             key={i}
+            className={type===v?style['active-btn']:style['normal-btn']}
             onClick={() => {
               setType(v)
             }}
@@ -94,7 +131,7 @@ export default function TodoIndex() {
             {v}
           </button>
         )
-      })}
+      })} */}
     </>
   )
 }

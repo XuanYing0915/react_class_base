@@ -1,13 +1,27 @@
 import React from 'react'
 import Item from './item'
+import EditForm from '../edit-from'
 
-export default function List({ todos, handleRemove, handleToggleCompleted }) {
+export default function List({
+  todos,
+  handleRemove,
+  handleToggleCompleted,
+  handleToggleEditing,
+  handleUpdateText,
+}) {
   return (
     <>
       <ul>
         {todos.map((v) => {
-          const { id, completed, text } = v
-          return (
+          const { id, completed, text, editing } = v
+          return editing ? (
+            <EditForm
+              key={id}
+              id={id}
+              text={text}
+              handleUpdateText={handleUpdateText}
+            />
+          ) : (
             <Item
               key={id}
               id={id}
@@ -15,6 +29,7 @@ export default function List({ todos, handleRemove, handleToggleCompleted }) {
               text={text}
               handleToggleCompleted={handleToggleCompleted}
               handleRemove={handleRemove}
+              handleToggleEditing={handleToggleEditing}
             />
           )
         })}

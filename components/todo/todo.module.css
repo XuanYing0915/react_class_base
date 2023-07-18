@@ -9,3 +9,14 @@
     font-style: italic;
 }
 
+.normal-btn{
+    background-color: lightgrey;
+    color: black;
+    border: 1px solid black;
+}
+
+.active-btn{
+    background-color: #137916;
+    color:white;
+    border: 1px solid black;
+}
