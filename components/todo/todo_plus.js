@@ -1,10 +1,11 @@
 import { useState } from 'react'
+import AddForm from './add-form'
 
 export default function TodoIndexPlus() {
-  // 定義文字輸入用的狀態
-  const [inputText, setInputText] = useState('')
-  // 為了要修正中文輸入法的用Enter組字用的信號狀態
-  const [isCompositing, setIsCompositing] = useState(false)
+  //   // 定義文字輸入用的狀態
+  //   const [inputText, setInputText] = useState('')
+  //   // 為了要修正中文輸入法的用Enter組字用的信號狀態
+  //   const [isCompositing, setIsCompositing] = useState(false)
 
   // 定義待辨事項狀態，每個成員 todo = { id:number, text:string, completed:bool }
   // !!重要!! 資料一定要有id，因為key要用id才可以作新增、修改、刪除，這是react中map時需要的
@@ -49,9 +50,15 @@ export default function TodoIndexPlus() {
     return todos.filter((v) => v.id !== id)
   }
 
+  // 專門設計給拆分出AddForm子元件用的處理函式
+  const handleAdd = (inputText) => {
+    setTodos(add(todos, inputText))
+  }
+
   return (
     <>
-      <input
+      <AddForm handleAdd={handleAdd} />
+      {/* <input
         type="text"
         value={inputText}
         onChange={(e) => {
@@ -70,7 +77,7 @@ export default function TodoIndexPlus() {
             setInputText('')
           }
         }}
-      />
+      /> */}
       <hr />
       <ul>
         {todos.map((v) => {
