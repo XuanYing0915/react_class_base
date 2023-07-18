@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import AddForm from './add-form'
-import Item from './item'
+import List from './list'
 
 export default function TodoIndexPlus() {
   //   // 定義文字輸入用的狀態
@@ -89,7 +89,13 @@ export default function TodoIndexPlus() {
         }}
       /> */}
       <hr />
-      <ul>
+      {/* 引入list */}
+      <List
+        todos={todos}
+        handleRemove={handleRemove}
+        handleToggleCompleted={handleToggleCompleted}
+      />
+      {/* <ul>
         {todos.map((v) => {
           const { id, completed, text } = v
           return (
@@ -103,7 +109,7 @@ export default function TodoIndexPlus() {
             />
           )
         })}
-      </ul>
+      </ul> */}
     </>
   )
 }

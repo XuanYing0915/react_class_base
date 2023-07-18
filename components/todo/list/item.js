@@ -1,4 +1,5 @@
-import React from 'react'
+// 導入css modules樣式
+import styles from '../todo.module.css'
 
 export default function Item({
   id,
@@ -9,7 +10,8 @@ export default function Item({
 }) {
   return (
     <>
-      <li key={id}>
+      {/* 以completed狀態來切換呈現樣式 */}
+      <li className={completed ? styles.completed : styles.active}>
         <input
           type="checkbox"
           checked={completed}
@@ -18,8 +20,7 @@ export default function Item({
             handleToggleCompleted(id)
           }}
         />
-        {/* 切換completed狀態，呈現刪除線樣式 */}
-        {completed ? <del>{text}</del> : text}
+        {text}
         <button
           onClick={() => {
             // setTodos(remove(todos, id))
