@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import AddForm from './add-form'
+import Item from './item'
 
 export default function TodoIndexPlus() {
   //   // 定義文字輸入用的狀態
@@ -54,6 +55,15 @@ export default function TodoIndexPlus() {
   const handleAdd = (inputText) => {
     setTodos(add(todos, inputText))
   }
+  // 專門設計給拆分出item子元件用的處理函式
+  const handleToggleCompleted = (id) => {
+    setTodos(toggleCompleted(todos, id))
+  }
+
+  // 專門設計給Item子元件用的處理函式
+  const handleRemove = (id) => {
+    setTodos(remove(todos, id))
+  }
 
   return (
     <>
@@ -81,8 +91,24 @@ export default function TodoIndexPlus() {
       <hr />
       <ul>
         {todos.map((v) => {
+          const { id, completed, text } = v
           return (
-            <li key={v.id}>
+            <Item
+              key={id}
+              id={id}
+              completed={completed}
+              text={text}
+              handleToggleCompleted={handleToggleCompleted}
+              handleRemove={handleRemove}
+            />
+          )
+        })}
+      </ul>
+    </>
+  )
+}
+{
+  /* <li key={v.id}>
               <input
                 type="checkbox"
                 checked={v.completed}
@@ -90,7 +116,7 @@ export default function TodoIndexPlus() {
                   setTodos(toggleCompleted(todos, v.id))
                 }}
               />
-              {/* 切換completed狀態，呈現刪除線樣式 */}
+             切換completed狀態，呈現刪除線樣式 
               {v.completed ? <del>{v.text}</del> : v.text}
               <button
                 onClick={() => {
@@ -99,10 +125,5 @@ export default function TodoIndexPlus() {
               >
                 刪除
               </button>
-            </li>
-          )
-        })}
-      </ul>
-    </>
-  )
+            </li> */
 }
