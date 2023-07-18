@@ -15,6 +15,8 @@ export default function TodoIndexPlus() {
 
   // 建立新todo
   // 純粹函式(pure function)，只處理狀態改變
+  //   因為是閉鎖的  必須自己設定id 不能用引用日期或是外來套件產生
+  //   所以選擇使用id+1方式
   const add = (todos, text) => {
     // 仿照資料庫遞增id的作法(id需要有規則和都是數字才可以)
     // 取出所有id為陣列
