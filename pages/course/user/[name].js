@@ -6,7 +6,6 @@ export default function UserName() {
 
   const { name } = router.query
   console.log(router.query)
-  console.log(router.query)
   return (
     <>
       <div>檔名可以是[].js 組成</div>
