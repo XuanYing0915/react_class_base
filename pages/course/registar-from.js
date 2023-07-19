@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
 export default function RegistarFrom() {
+  // 注意 狀態是物件時的初始值
   const [user, setUser] = useState({
     fullName: '',
     email: '',
