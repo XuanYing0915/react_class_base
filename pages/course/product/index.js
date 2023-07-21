@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 
+import styles from '@/styles/londer.module.css'
+
 // https://my-json-server.typicode.com/eyesofkids/json-fake-data/products
 export default function ProductIndex() {
   // [
@@ -15,14 +17,26 @@ export default function ProductIndex() {
   // ]
   const [products, setProducts] = useState([])
 
+  // 載入指示器用
+  const [loading, setLoading] = useState(false)
+
   // 向伺服器獲取資料的函式
   const getProducts = async () => {
+    // 開啟載入指示動畫
+    setLoading(true)
+
     const res = await fetch(
       'https://my-json-server.typicode.com/eyesofkids/json-fake-data/products'
     )
     const data = await res.json()
 
     setProducts(data)
+
+    // 1.5秒後關閉載入指示動畫
+    setTimeout(() => {
+      setLoading(false)
+    }, 1500)
+
     console.log(data)
   }
 
@@ -31,20 +45,32 @@ export default function ProductIndex() {
     getProducts()
   }, [])
 
+  const loader = (
+    <div className={styles['lds-facebook']}>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  )
+
+  const display = (
+    <ul>
+      {products.map((v) => {
+        return (
+          <li key={v.id}>
+            <Link href={`/course/product/${v.id}`}>
+              {v.name} / {v.price}
+            </Link>
+          </li>
+        )
+      })}
+    </ul>
+  )
+
   return (
     <>
       <h1>商品列表頁</h1>
-      <ul>
-        {products.map((v) => {
-          return (
-            <li key={v.id}>
-              <Link href={`/course/product/${v.id}`}>
-                {v.name} / {v.price}
-              </Link>
-            </li>
-          )
-        })}
-      </ul>
+      {loading ? loader : display}
     </>
   )
 }

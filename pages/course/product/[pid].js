@@ -46,15 +46,21 @@ export default function ProductDetail() {
   }, [router.isReady])
   // ^^^^^^^^^^^^^^^ isReady=true代表目前水合化(hydration)已經完成，可以開始用router.query了
 
-  return (
+  const display = (
     <>
-      <h1>商品詳細頁</h1>
       <div>
         <img src={product.picture} />
       </div>
       <div>商品名: {product.name}</div>
       <div>價格: {product.price}</div>
       <hr />
+    </>
+  )
+
+  return (
+    <>
+      <h1>商品詳細頁</h1>
+      {product.id && display}
       <Link href="/course/product">回列表頁</Link>
     </>
   )
